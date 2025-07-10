@@ -1,3 +1,13 @@
-Set WshShell = CreateObject("WScript.Shell") 
-WshShell.Run chr(34) & "run.bat" & Chr(34), 0
-Set WshShell = Nothing
+On Error Resume Next
+
+Dim shell, result
+Set shell = CreateObject("WScript.Shell")
+
+' Run run.bat with no window (0), do not wait for it to finish (False)
+result = shell.Run("run.bat", 0, False)
+
+If Err.Number <> 0 Then
+    WScript.Echo "Error: " & Err.Description
+End If
+
+Set shell = Nothing
